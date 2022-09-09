@@ -39,35 +39,31 @@ const getNeeded = async function(name) {
     return response;
 };
 
-const adjustdet = (recipe) =>{
+const adjust = (recipe, details) =>{
     let diets = [];
     for(let diet of recipe.diets){
         diets.push(diet.name)
     };
-    const cleanrecipe = {
-        id: recipe.ID, 
-        title: recipe.name, 
-        summary: recipe.summary, 
-        healthScore: recipe.healthScore, 
-        steps: recipe.steps,
-        diets,
-        image: recipe.image,
-    };
-    return cleanrecipe
-};
-
-const adjust = (recipe) =>{
-    let diets = [];
-    for(let diet of recipe.diets){
-        diets.push(diet.name)
-    };
-    const cleanrecipe = {
-        id: recipe.ID, 
-        title: recipe.name, 
-        healthScore: recipe.healthScore, 
-        diets,
-        image: recipe.image,
-    };
+    let cleanrecipe= {};
+    if(details){
+        cleanrecipe = {
+            id: recipe.ID, 
+            title: recipe.name, 
+            summary: recipe.summary, 
+            healthScore: recipe.healthScore, 
+            steps: recipe.steps,
+            diets,
+            image: recipe.image,
+        };
+    } else {
+        cleanrecipe = {
+            id: recipe.ID, 
+            title: recipe.name, 
+            healthScore: recipe.healthScore, 
+            diets,
+            image: recipe.image,
+        };
+    }
     return cleanrecipe
 };
 
@@ -114,7 +110,7 @@ const searchById = async function(id){
                 }
             }
         })
-        const response = adjustdet(recipe);
+        const response = adjust(recipe, true);
         return response;
     } else {
         const idSearch = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
@@ -128,10 +124,20 @@ const searchById = async function(id){
         const response = {id, title, healthScore, image, summary, tdiets, steps};
         return response;
     }
+};
+
+const createRecipe = async function(title, healthScore, summary, steps, image, diets){
+    const nwrecipe = await Recipe.create({name: title, healthScore, summary, steps, image})
+        for(let diet of diets){
+            let dbDiet = await Diet.findOne({where: {name: diet}});
+            await nwrecipe.addDiet(dbDiet.id);
+        };
+    return "Your Recipe was successfully Created";
 }
 
 module.exports = {
     getNeeded,
     dbRecipes,
-    searchById
+    searchById,
+    createRecipe
 }
