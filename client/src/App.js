@@ -1,10 +1,19 @@
+import React from 'react'
 import './App.css';
+import Landing from './components/Landing'
+//import NavBar from '../src/components/NavBar'
+import Home from './components/Home'
+
+import { BrowserRouter, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Food</h1>
-    </div>
+    <BrowserRouter>
+      <React.Fragment>
+          <Route exact path='/' component={Landing} />
+          <Route exact path='/home' component={Home} />
+      </React.Fragment>
+    </BrowserRouter>
   );
 }
 
