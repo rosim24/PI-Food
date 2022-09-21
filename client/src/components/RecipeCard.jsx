@@ -6,7 +6,7 @@ export default class RecipeCard extends React.Component{
         const {id, title, healthScore, image, diets} = this.props.recipe
         return(
             <Fragment>
-            <Link to={`/recipes/${id    }`}>
+            <Link to={`/recipe/${id    }`}>
             <p>{title}</p>
             <p> {healthScore} </p>
             <img alt="recipe" src={image}/>

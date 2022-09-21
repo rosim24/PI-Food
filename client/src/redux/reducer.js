@@ -1,4 +1,4 @@
-import { GET_RECIPES, GET_DIETS, FILTER_BY_DIET,FILTER_BY_SOURCE, ORDER_RECIPES, SEARCH_BY_NAME } from "./actions";
+import { GET_RECIPES, GET_DIETS, FILTER_BY_DIET,FILTER_BY_SOURCE, ORDER_RECIPES, SEARCH_BY_NAME, SEARCH_BY_ID, CREATE_RECIPE} from "./actions";
 
 const initialState = {
     diets: [],
@@ -17,6 +17,9 @@ const reducer = (state = initialState, action) => {
       }
       case SEARCH_BY_NAME:{
         return {...state, recipes: action.payload}
+      }
+      case SEARCH_BY_ID: {
+        return {...state, recipe: action.payload}
       }
       case FILTER_BY_DIET:{
         let filtered = [];
@@ -56,15 +59,10 @@ const reducer = (state = initialState, action) => {
           })
         }
       }
-      /*case CREATE_RECIPE:{
-        return {...state, houses: [...state.houses, action.payload]}
+      case CREATE_RECIPE:{
+        return state
       }
-      case GET_RECIPE_BY_ID:{
-        return{
-          ...state,
-          houses: state.houses.filter(house => house.id !== action.payload),
-        }
-      }*/
+      
       default: return state
      
   };

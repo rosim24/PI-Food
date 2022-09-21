@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-
+import s from './styles/SearchBar.module.css'
+//https://static3.depositphotos.com/1006774/267/v/600/depositphotos_2673487-stock-illustration-red-and-white-popular-background.jpg
 import { getRecipes, filterByDiet, filterBySource, orderRecipes, searchByName } from "../redux/actions";
 
 export default function SearchBar ({handleOrder}) {
@@ -32,7 +33,7 @@ export default function SearchBar ({handleOrder}) {
     }
 
     return(
-        <div>
+        <div className={s.bar}>
             <h1>Food SPA</h1>
 
             <input type="text" placeholder="Find by name" value={name} onChange={e => setName(e.target.value)}></input><button onClick={e => runSearchByName(e)}>Search</button>

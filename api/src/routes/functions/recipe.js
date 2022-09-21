@@ -39,6 +39,23 @@ const getNeeded = async function(name) {
     return response;
 };
 
+const cleanSummary = function(summary){
+    const first = summary.indexOf("score");
+    const second = summary.indexOf(".",first);
+    const finaltext = summary.slice(0,second);
+    const woutobold = finaltext.split("<b>").join("");
+    const woutcbold = woutobold.split("</b>").join("");
+    while(woutcbold.includes("<a")){
+        let fref = woutcbold.indexOf("<a");
+        let sref = woutcbold.indexOf(">",fref);
+        let first = woutcbold.slice(0,fref);
+        let second = woutcbold.slice(sref+1);
+        let almost = first+second;
+        woutcbold = almost.split("</a>").join("");
+    }
+    return woutcbold
+}
+
 const adjust = (recipe, details) =>{
     let diets = [];
     for(let diet of recipe.diets){
@@ -121,7 +138,8 @@ const searchById = async function(id){
             steps.push(e.step)
         })
         let tdiets = resumeDiets(idSearch.data);
-        const response = {id, title, healthScore, image, summary, tdiets, steps};
+        let cleansummary = cleanSummary(summary)
+        const response = {id, title, healthScore, image, summary: cleansummary, tdiets, steps};
         return response;
     }
 };
