@@ -1,4 +1,5 @@
 import React from "react";
+import s from './styles/Paging.module.css'
 
 export default class PagingBar extends React.Component{
     render(){
@@ -8,10 +9,10 @@ export default class PagingBar extends React.Component{
             bar.push(i)
         };
     return(
-        <ul>
+        <ul className={s.list}>
             {bar && bar.map(e => (
-                <li key = {e}>
-                    <button onClick={() => handlePage(e)}>{e}</button>
+                <li key = {e} className={s.element}>
+                    <button className={s.btn} onClick={() => handlePage(e)}>{e}</button>
                 </li>
             ))}
         </ul>

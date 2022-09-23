@@ -1,0 +1,7 @@
+.container{
+    background-image: url('https://wallpaperaccess.com/full/1151945.jpg');
+    
+    display: grid;
+    grid-template-columns: 350px 350px 350px;
+    justify-content: center;
+}

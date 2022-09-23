@@ -6,6 +6,7 @@ import { getRecipes, getDiets, orderRecipes } from "../redux/actions";
 import RecipeCard from "./RecipeCard";
 import PagingBar from "./PagingBar";
 import SearchBar from "./SearchBar";
+import s from './styles/Home.module.css'
 
 export default function Home () {
     const dispatch = useDispatch();
@@ -39,13 +40,14 @@ export default function Home () {
             <PagingBar  totalRecipes={allRecipes.length} 
                         recipesPerPage={qttyPerPage} 
                         handlePage={handlePage}/>
-            {
-            currentRecipes && currentRecipes.map(r =>(
-                <RecipeCard key = {r.id} 
-                            recipe= {r} />
-            ))
-            }
-                            
+            <div className={s.container}>
+                {
+                currentRecipes && currentRecipes.map(r =>(
+                    <RecipeCard key = {r.id} 
+                                recipe= {r} />
+                ))
+                }
+            </div>           
         
         </div>
     )

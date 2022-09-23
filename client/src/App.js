@@ -17,7 +17,7 @@ function App() {
           <Route path='/recipe/:id' component={DetailedRecipe} />
       </React.Fragment>
     </BrowserRouter>
-  );
+  )
 }
 
 export default App;

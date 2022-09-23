@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { createRecipe } from '../redux/actions';
-
+//if (!/^(http[s]?)/.test(value))
 export function validate(inputState) {
     let errors = {};
     if (!inputState.title) {

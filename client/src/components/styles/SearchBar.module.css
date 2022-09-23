@@ -1,3 +1,95 @@
 .bar{
-    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/006/060/938/small/pastel-tablecloth-gingham-seamless-plaid-pattern-suitable-for-fashion-interiors-and-easter-decor-free-vector.jpg');
+    background-color: rgb(242, 244, 244);
+    margin: 0;
+}
+.titlecontainer{
+    display: flex;
+    justify-content:space-between;
+    flex-direction: row;
+    align-items: center;
+    
+}
+.title{
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 200px;
+    color: rgb(0, 0, 0);
+    font-family: 'Titan One';
+    letter-spacing: 2px;
+    font-size: 50px;
+}
+.searchcontainer{
+    display: flex;
+    justify-content:space-evenly;
+    flex-direction: row;
+    align-items: center;
+}
+.div{
+    display: flex;
+    align-items: center;
+    margin-right: 18px;
+}
+.input{
+    background:rgb(235, 222, 240);
+	color: rgb(33, 32, 32);
+	height: 25px;
+	padding-left: 18px;
+	border-radius: 30px;
+	border: 3px solid #2f2e2e;
+}
+.searchbutton{
+    color: #e8efe8;
+	background: #212222;
+    font-size:x-large;
+    border-radius: 30px;
+    padding: 0px 4px;
+}
+.link{
+    text-decoration: none;
+    background-color: rgb(28, 30, 29);
+    color: white;
+    padding: 8px 8px;
+    border-radius: 15px;
+    font-family: candara;
+    font-size: medium;
+    font-weight: 500;
+    border-bottom-style: outset;
+    margin-right: 25px;
+}
+.reload{
+    color: #f6f9f9;
+    background: #282828;
+    font-size: medium;
+    font-weight: 600;
+    font-family: candara;
+    border-radius: 30px;
+    padding: 5px 10px;
+    margin-left: 18px;
+}
+.bottombar{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+.combo{
+    background-color: rgb(235, 222, 240);
+    border-radius: 20px;
+    border: solid;
+    border-color: rgb(42, 41, 41);
+    margin-bottom: 10px;
+}
+.combolabel{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0px 10px;
+    font-size: medium;
+}
+.comboselect{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0px 10px;
+    margin-right: 10px;
+    background-color: rgb(235, 222, 240);
+    border-color: rgb(235, 222, 240);
 }

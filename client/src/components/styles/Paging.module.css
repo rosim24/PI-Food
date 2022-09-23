@@ -1,0 +1,19 @@
+.list{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(81, 46, 95);
+    margin: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.element{
+    list-style: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-inline: 8px;
+}
+.btn{
+    font-family: fantasy;
+    border-radius: 5px;
+    background-color: rgb(242, 244, 244);
+}
