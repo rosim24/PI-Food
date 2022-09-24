@@ -35,7 +35,7 @@ export default function Home () {
     }
 
     return(
-        <div>
+        <div className={s.supercontainer}>
             <SearchBar handleOrder = {handleOrder}/>
             <PagingBar  totalRecipes={allRecipes.length} 
                         recipesPerPage={qttyPerPage} 

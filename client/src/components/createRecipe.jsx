@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+
 import { createRecipe } from '../redux/actions';
+import s from './styles/Create.module.css'
+
 //if (!/^(http[s]?)/.test(value))
 export function validate(inputState) {
     let errors = {};
@@ -16,11 +19,7 @@ export function validate(inputState) {
     }
     if (!inputState.image) {
         errors.image = 'Use an url image to share how it looks (opcional)';
-      }
-    if (inputState.diets.length<1) {
-        errors.image = 'You must choose at least one';
-      }
-  
+    }
     return errors;
   };
 
@@ -32,7 +31,7 @@ export default function CreateRecipe () {
         title: "",
         summary: "",
         diets: [],
-        healthScore:"",
+        healthScore:"50",
         image:"",
         steps: [],
         step:"",
@@ -70,8 +69,7 @@ export default function CreateRecipe () {
             !inputState.summary ||
             errors.title ||
             errors.summary ||
-            errors.healthScore ||
-            errors.diets);
+            errors.healthScore);
     }
     
     function handleCreate(e){
@@ -90,52 +88,76 @@ export default function CreateRecipe () {
     }
 
     return(
-        <div>
-            <Link to="/home"><button>Back to Home</button></Link>
-            <h3>Share with us your favorite Recipe</h3>
-            <form onSubmit={(e) => handleCreate(e)}>
-                <input type={"submit"} value={"Submit here when done"} disabled={ensabledSubmit()}/>
-            <label>Title: </label><input name="title" value={inputState.title} onChange={(e) => handleChange(e)}></input>
-            {errors.title && (<p>{errors.title}</p>)}
-            <label>Summary: </label><textarea type="text" name="summary" value={inputState.summary} onChange={(e) => handleChange(e)}/>
-            {errors.summary && (<p>{errors.summary}</p>)}
-            <p>Choose bettwen the diets that apply to your recipe:</p>
-            {errors.diets && (<p>{errors.diets}</p>)}
-            <div>
-            {diets.map((diets, index) => {
-                return (
-                    <li key={index}>
-                        <div className="section">
-                        <input
-                            type="checkbox"
-                            id={index}
-                            name={diets.name}                         
-                            value = {diets.name}
-                            onChange = {(e) => handleCheckbox(e)}
-                        />
-                        <label key={index}>{diets.name}</label>
+        <div className={s.supercontainer}>
+            <Link to="/home"><button className={s.back}>Go Back!</button></Link>
+            <div className={s.container}>
+                <h3 className={s.title}>Share with us your favorite Recipe!</h3>
+                <form className={s.topform} onSubmit={(e) => handleCreate(e)}>
+                    <input className={s.onsubmit} type={"submit"} value={"Submit here when done"} disabled={ensabledSubmit()}/>
+                    <div className={s.combodiv}>
+                        <label className={s.combolable}>Title: </label>
+                        <input className={s.comboinput} name="title" value={inputState.title} onChange={(e) => handleChange(e)}/>
+                        {errors.title && (<p className={s.warning}>{errors.title}</p>)}
                     </div>
-                    </li>
-                );
-            })}
+                    <div className={s.combodiv}>
+                        <label className={s.combolable}>Summary: </label>
+                        <textarea className={s.areas} type="text" name="summary" value={inputState.summary} onChange={(e) => handleChange(e)}/>
+                        {errors.summary && (<p className={s.warning}>{errors.summary}</p>)}
+                    </div>
+                    <p className={s.combotitle}>Choose bettwen the diets that apply to your recipe:</p>
+                    <ul>
+                    {diets.map((diets, index) => {
+                        return (
+                            <li className={s.diets} key={index}>
+                                <div>
+                                <input
+                                    className={s.check}
+                                    type="checkbox"
+                                    id={index}
+                                    name={diets.name}                         
+                                    value = {diets.name}
+                                    onChange = {(e) => handleCheckbox(e)}
+                                />
+                                <label className={s.lablel} key={index}>{diets.name}</label>
+                            </div>
+                            </li>
+                        );
+                    })}
+                    </ul>
+                    <div className={s.combodiv}>
+                        <label className={s.combolable}>Health Score: </label>
+                        <input className={s.range} type="range" min="0" max="100" name="healthScore" value={inputState.healthScore} onChange={(e) => handleChange(e)}/>
+                        <label className={s.combolable}>{inputState.healthScore}</label>
+                        {errors.healthScore && (<p className={s.warning}>{errors.healthScore}</p>)}
+                    </div>
+                    <div className={s.combodiv}>
+                        <label className={s.combolable}>URL Image: </label>
+                        <input className={s.comboinput} name="image" value={inputState.image} onChange={(e) => handleChange(e)}/>
+                        {errors.image && (<p className={s.warning}>{errors.image}</p>)}
+                    </div>
+                </form>
+                <form onSubmit={(e) => handleStep(e)}>
+                    <p className={s.combotitle}>Describe one by one the steps: </p>
+                    <div className={s.combostep}>
+                        <textarea className={s.areastep} name="step" value={inputState.step} onChange={(e) => handleChange(e)}/>
+                        <input className={s.stepsub} name="steps" type={"submit"} value={`Save Step #${inputState.steps.length+1}`}/>
+                    </div>
+                    <ol>
+                    {inputState.steps.map((step, index)=>{
+                        return (
+                            <li className={s.combolable} key={index}>
+                                <label className={s.combolable}>{step}</label>
+                                <button
+                                    className={s.stepsub} 
+                                    value={step}
+                                    onClick={(e)=>onDelete(e)}
+                                >X</button>
+                            </li>
+                        )
+                    })}
+                    </ol>
+                </form>
             </div>
-            <label>Health Score: </label><input name="healthScore" value={inputState.healthScore} onChange={(e) => handleChange(e)}/>
-            {errors.healthScore && (<p>{errors.healthScore}</p>)}
-            <label>URL Image: </label><input name="image" value={inputState.image} onChange={(e) => handleChange(e)}/>
-            {errors.image && (<p>{errors.image}</p>)}
-            </form>
-            <form onSubmit={(e) => handleStep(e)}>
-            <label>Describe one by one the steps: </label><textarea name="step" value={inputState.step} onChange={(e) => handleChange(e)}/><input name="steps" type={"submit"} value={`Save Step #${inputState.steps.length+1}`}/>
-            <ol>
-            {inputState.steps.map((step, index)=>{
-                return (
-                    <li key={index}>
-                        <label>{step}</label><button value={step} onClick={(e)=>onDelete(e)}>X</button>
-                    </li>
-                )
-            })}
-            </ol>
-            </form>
         </div>
     )
 }
