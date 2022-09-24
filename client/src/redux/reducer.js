@@ -58,13 +58,12 @@ const reducer = (state = initialState, action) => {
             return a.healthScore - b.healthScore
           })
         }
+        break;
       }
       case CREATE_RECIPE:{
         return state
       }
-      
-      default: return state
-     
+      default: return state;
   };
 };
 

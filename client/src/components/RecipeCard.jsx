@@ -11,7 +11,7 @@ export default class RecipeCard extends React.Component{
             <div className={s.titlecontainer}>
                 <label className={s.title}>{title}</label>
                 <label className={s.scorecontainer}>
-                    <img src="https://static.vecteezy.com/system/resources/previews/000/632/290/non_2x/star-icon-symbol-sign-vector.jpg" className={s.img}/>
+                    <img src="https://static.vecteezy.com/system/resources/previews/000/632/290/non_2x/star-icon-symbol-sign-vector.jpg" alt="star" className={s.img}/>
                     <label className={s.score}> {healthScore} </label>
                 </label>
             </div>

@@ -13,7 +13,7 @@ export class DetailedRecipe extends React.Component{
         const {title, summary, healthScore, image, diets, steps} = this.props.recipe
         return(
             <div className={s.disp}>
-                <div className={s.bar}><Link to='/home'><button className={s.back}>Go Back!</button></Link><img className={s.img} src={image} width="111px" height="82px"/></div>
+                <div className={s.bar}><Link to='/home'><button className={s.back}>Go Back!</button></Link><img className={s.img} alt={title} src={image} width="111px" height="82px"/></div>
                 <div className={s.container}>
                     <h2 className={s.title}>{title}</h2>
                     <p className={s.combotitle}>Summary:</p>
