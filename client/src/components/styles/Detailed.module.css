@@ -1,5 +1,7 @@
 .disp{
+    box-sizing: content-box;
     width: -webkit-fill-available;
+    height: -webkit-fill-available-webkit-fill-available;
     background-image: url(https://wallpaperaccess.com/full/1151945.jpg);
     display: flex;
     flex-direction: column;
@@ -7,6 +9,7 @@
 .back{
     margin-top: 15px;
     margin-bottom: 15px;
+    margin-left: 130px;
     color: whitesmoke;
     background-color: #282828;
     font-size: larger;
@@ -41,6 +44,7 @@
     padding-inline: 20px;
     font-family: 'Arima';
     font-size: 18px;
+    text-align: justify;
 }
 .diets{
     font-family: 'Arima';
@@ -67,7 +71,14 @@
     justify-content: space-around;
     margin-block: 15px;
 }
+.fix{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-block: 15px;  
+}
 .img{
     border-radius: 10px;
     border-style: groove;
+    margin-right: 20px;
 }

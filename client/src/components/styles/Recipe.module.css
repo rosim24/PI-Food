@@ -2,7 +2,7 @@
     text-decoration: none;    
 }
 .container{
-    background-color: rgb(251, 238, 230, .8);
+    background-color: rgba(238, 239, 239, 0.8);
     border-radius: 10px;
     width: 330px;
     margin: 10px;
@@ -17,7 +17,7 @@
     height: 62px;
 }
 .title{
-    color: rgb(100,30,22);
+    color: rgb(74, 35, 90);
     width: 80%;
     font-weight: 500;
     margin-left: 15px;
@@ -34,7 +34,7 @@
     border-radius: 30px;
 }
 .score{
-    color: rgb(100,30,22);
+    color: rgb(74, 35, 90);
     font-weight: 500;
     margin-right: 15px;
 }
@@ -55,7 +55,7 @@
     margin-bottom: 10px;
 }
 .diet{
-    color: rgb(100,30,22);
+    color: rgb(74, 35, 90);
     justify-content: center;
     align-items: center;
 }

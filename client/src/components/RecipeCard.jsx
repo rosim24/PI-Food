@@ -7,7 +7,7 @@ export default class RecipeCard extends React.Component{
         const {id, title, healthScore, image, diets} = this.props.recipe
         return(
             <div className={s.container}>
-            <Link to={`/recipe/${id}`} className={s.link}>
+            <Link to={id === 0 ? '/home' :`/recipe/${id}`} className={s.link}>
             <div className={s.titlecontainer}>
                 <label className={s.title}>{title}</label>
                 <label className={s.scorecontainer}>

@@ -17,3 +17,9 @@
     border-radius: 5px;
     background-color: rgb(242, 244, 244);
 }
+.btn:hover{
+    background-color: rgb(81, 46, 95);
+    color: whitesmoke;
+    border-color: whitesmoke;
+    cursor: pointer;
+}

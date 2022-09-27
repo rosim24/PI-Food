@@ -9,8 +9,10 @@ import s from './styles/Create.module.css'
 export function validate(inputState) {
     let errors = {};
     if (!inputState.title) {
-      errors.title = 'A Title is required';
-    } 
+        errors.title = 'A Title is required';
+    } else if(!/^[a-zA-Z]+$/.test(inputState.title)){
+        errors.title = 'Please do not use numbers or any special character';
+    }
     if (!inputState.summary) {
       errors.summary = 'A Summary is required';
     }
@@ -19,6 +21,8 @@ export function validate(inputState) {
     }
     if (!inputState.image) {
         errors.image = 'Use an url image to share how it looks (opcional)';
+    } else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png)/.test(inputState.image)){
+        errors.image = 'Please, use a valid url of an image in jpg or png format.'
     }
     return errors;
   };
@@ -83,7 +87,6 @@ export default function CreateRecipe () {
             diets: inputState.diets
         }
         dispatch(createRecipe(recipe));
-        alert(`You added ${inputState.title} successfully!`);
         history.push('/home')
     }
 

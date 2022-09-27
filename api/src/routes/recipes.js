@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { Diet, Recipe } = require('../db')
 const router = Router();
 const utils = require('./functions/recipe');
+const failure = [{id: 0, title:"Sorry, we couldn't find what you're looking for", healthScore: 0, image:"https://us.123rf.com/450wm/belchonock/belchonock1910/belchonock191003408/130919481-ajuste-de-la-tabla-elegante-sobre-fondo-de-m%C3%A1rmol-gris-endecha-plana.jpg?ver=6" }]
 
 router.get('/', async(req, res)=>{
     const {name} = req.query;
@@ -10,9 +11,9 @@ router.get('/', async(req, res)=>{
         const fromDB = await utils.dbRecipes(name);
         const allRecipes = [...fromApi,...fromDB]
         if(allRecipes.length>0) res.status(200).json(allRecipes);
-        else res.status(404).send("Sorry, We couldn't find any Recipe");        
+        else res.status(200).json(failure);        
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).json(error)
     }
 });
 
@@ -22,7 +23,8 @@ router.get('/:id', async (req, res)=>{
         const recipeById = await utils.searchById(id);
         res.status(200).json(recipeById);
     } catch (error) {
-        res.status(400).send(error)
+        console.log(error)
+        res.status(400).json(error)
     }
 })
 
@@ -31,8 +33,8 @@ router.post('/', async (req, res) =>{
         const {title, healthScore, summary, steps, image, diets} = req.body;
         if(title && summary){
         const result = await utils.createRecipe(title, healthScore, summary, steps, image, diets)
-        res.status(201).send(result);
-        } else res.status(400).send("You need to name your Recipe and give us a summary in order to Create it!");
+        res.status(201).json(result);
+        } else res.status(400).json({message: "Something went wrong, Please try again"});
     } catch (error) {
         res.status(400).send(error)
     }

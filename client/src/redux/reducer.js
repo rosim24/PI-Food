@@ -37,30 +37,36 @@ const reducer = (state = initialState, action) => {
         return {...state, recipes: filtered}
       }
       case ORDER_RECIPES:{
+        let ordered = [];
         if(action.payload === "asc"){
-          state.recipes.sort(function(a,b){
+          ordered = state.recipes.sort(function(a,b){
             if(a.title > b.title) return 1
             else if(b.title > a.title) return -1
             else return 0
           })
+          return {...state, recipes: ordered}
         } else if(action.payload === "desc"){
-          state.recipes.sort(function(a,b){
+          ordered = state.recipes.sort(function(a,b){
             if(a.title > b.title) return -1
             else if(b.title > a.title) return 1
             else return 0
           })
+          return {...state, recipes: ordered}
         } else if(action.payload === "fit"){
-          state.recipes.sort(function(a,b){
+          ordered = state.recipes.sort(function(a,b){
             return b.healthScore - a.healthScore
           })
+          return {...state, recipes: ordered}
         } else if(action.payload === "fat"){
-          state.recipes.sort(function(a,b){
+          ordered = state.recipes.sort(function(a,b){
             return a.healthScore - b.healthScore
           })
+          return {...state, recipes: ordered}
         }
         break;
       }
       case CREATE_RECIPE:{
+        alert(action.payload.message)
         return state
       }
       default: return state;

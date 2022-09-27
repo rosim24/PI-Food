@@ -40,20 +40,26 @@ const getNeeded = async function(name) {
 };
 
 const cleanSummary = function(summary){
+    summary = summary+".";
+    console.log("entra", summary)
     const first = summary.indexOf("score");
     const second = summary.indexOf(".",first);
     const finaltext = summary.slice(0,second);
     const woutobold = finaltext.split("<b>").join("");
     const woutcbold = woutobold.split("</b>").join("");
-    while(woutcbold.includes("<a")){
-        let fref = woutcbold.indexOf("<a");
-        let sref = woutcbold.indexOf(">",fref);
-        let first = woutcbold.slice(0,fref);
-        let second = woutcbold.slice(sref+1);
-        let almost = first+second;
-        woutcbold = almost.split("</a>").join("");
+    console.log(woutcbold)
+    const ref = woutcbold.indexOf("<")
+    console.log(ref)
+    let response
+    if(ref === -1 ) return woutcbold;
+    else {
+        let sec = woutcbold.indexOf(">", ref)
+        let f = woutcbold.slice(0,ref)
+        let s = woutcbold.slice(sec+1)
+        let almost= f+s
+        response = almost.split("</a>").join("");
     }
-    return woutcbold
+    return response;
 }
 
 const adjust = (recipe, details) =>{
@@ -134,12 +140,14 @@ const searchById = async function(id){
         if(!idSearch.data) return res.status(200).send("Sorry, We couldn't find that Recipe");
         const {title, healthScore, image, summary, analyzedInstructions} = idSearch.data;
         let steps = []
-        analyzedInstructions[0].steps.forEach(e => {
+        if(analyzedInstructions.length>0){
+            analyzedInstructions[0].steps.forEach(e => {
             steps.push(e.step)
-        })
+        })}
         let tdiets = resumeDiets(idSearch.data);
         let cleansummary = cleanSummary(summary)
-        const response = {id, title, healthScore, image, summary: cleansummary, tdiets, steps};
+        console.log(cleansummary)
+        const response = {id, title, healthScore, image, summary: cleansummary, diets: tdiets, steps};
         return response;
     }
 };
@@ -150,7 +158,7 @@ const createRecipe = async function(title, healthScore, summary, steps, image, d
             let dbDiet = await Diet.findOne({where: {name: diet}});
             await nwrecipe.addDiet(dbDiet.id);
         };
-    return "Your Recipe was successfully Created";
+    return {message: "Your Recipe was successfully Created"};
 }
 
 module.exports = {
