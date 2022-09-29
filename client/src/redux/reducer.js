@@ -1,4 +1,4 @@
-import { GET_RECIPES, GET_DIETS, FILTER_BY_DIET,FILTER_BY_SOURCE, ORDER_RECIPES, SEARCH_BY_NAME, SEARCH_BY_ID, CREATE_RECIPE} from "./actions";
+import { GET_RECIPES, GET_DIETS, FILTER_BY_DIET,FILTER_BY_SOURCE, ORDER_RECIPES, SEARCH_BY_NAME, SEARCH_BY_ID, CREATE_RECIPE, CLEAR_RECIPE, DELETE_RECIPE} from "./actions";
 
 const initialState = {
     diets: [],
@@ -19,6 +19,9 @@ const reducer = (state = initialState, action) => {
         return {...state, recipes: action.payload}
       }
       case SEARCH_BY_ID: {
+        return {...state, recipe: action.payload}
+      }
+      case CLEAR_RECIPE: {
         return {...state, recipe: action.payload}
       }
       case FILTER_BY_DIET:{
@@ -66,6 +69,10 @@ const reducer = (state = initialState, action) => {
         break;
       }
       case CREATE_RECIPE:{
+        alert(action.payload.message)
+        return state
+      }
+      case DELETE_RECIPE:{
         alert(action.payload.message)
         return state
       }

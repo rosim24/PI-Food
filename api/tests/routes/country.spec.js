@@ -6,7 +6,8 @@ const { Recipe, conn } = require('../../src/db.js');
 
 const agent = session(app);
 const recipe = {
-  name: 'Milanea a la napolitana',
+  name: 'Milanesa a la napolitana',
+  summary: 'A recipe for a yummy Milanesa'
 };
 
 describe('Recipe routes', () => {
@@ -20,5 +21,17 @@ describe('Recipe routes', () => {
     it('should get 200', () =>
       agent.get('/recipes').expect(200)
     );
+    it('responds with and object with API and DB recipes', () =>
+        agent.get('/recipes').then((res) => {
+          expect(res.body.length).toEqual(101);
+        }));
+    it('responds with and array with 101 recipes', () =>
+        agent.get('/recipes').then((res) => {
+          expect(res.body.length).toEqual(101);
+        }));
+    it('each recipe has at least a title an a summary', () =>
+        agent.get('/recipes').then((res) => {
+          expect(res.body.length).toEqual(101);
+        }));
   });
 });

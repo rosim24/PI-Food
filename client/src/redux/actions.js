@@ -6,6 +6,8 @@ export const ORDER_RECIPES = "ORDER_RECIPES"
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 export const SEARCH_BY_ID = "SEARCH_BY_ID"
 export const CREATE_RECIPE = "CREATE_RECIPE"
+export const CLEAR_RECIPE = "CLEAR_RECIPE"
+export const DELETE_RECIPE = "DELETE_RECIPE"
 
 export const getRecipes = () => dispatch => {
     return fetch('http://localhost:3001/recipes')
@@ -35,6 +37,10 @@ export const searchById = (id) => dispatch => {
         .catch(error => console.log(new Error(error)));
 }
 
+export const clearRecipe = () => {
+    return { type: CLEAR_RECIPE, payload: {}}
+}
+
 export const filterByDiet = (diet) => {
     return { type: FILTER_BY_DIET, payload: diet}
 }
@@ -51,5 +57,12 @@ export const createRecipe = (recipe) => dispatch => {
     return fetch('http://localhost:3001/recipes',{method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(recipe)})
             .then(r => r.json())
             .then(message => dispatch({type: CREATE_RECIPE, payload: message}))
+            .catch(error => console.log(new Error(error)));
+}
+
+export const deleteRecipe = (id) => dispatch => {
+    return fetch(`http://localhost:3001/recipes/${id}`, {method: "DELETE"})
+            .then(r => r.json())
+            .then(message => dispatch({type: DELETE_RECIPE, payload: message}))
             .catch(error => console.log(new Error(error)));
 }

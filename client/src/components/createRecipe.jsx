@@ -10,7 +10,7 @@ export function validate(inputState) {
     let errors = {};
     if (!inputState.title) {
         errors.title = 'A Title is required';
-    } else if(!/^[a-zA-Z]+$/.test(inputState.title)){
+    } else if(!/^[a-zA-Z\s]+$/.test(inputState.title)){
         errors.title = 'Please do not use numbers or any special character';
     }
     if (!inputState.summary) {
@@ -21,7 +21,7 @@ export function validate(inputState) {
     }
     if (!inputState.image) {
         errors.image = 'Use an url image to share how it looks (opcional)';
-    } else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png)/.test(inputState.image)){
+    } else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpeg|jpg|png)/.test(inputState.image)){
         errors.image = 'Please, use a valid url of an image in jpg or png format.'
     }
     return errors;

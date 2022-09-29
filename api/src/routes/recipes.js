@@ -40,4 +40,15 @@ router.post('/', async (req, res) =>{
     }
 })
 
+router.delete('/:id', async (req, res) =>{
+    const {id} = req.params;
+    const cid = id.slice(2);
+    try {
+        await Recipe.destroy({where: {id: cid}})
+        res.status(200).json({message: "The Recipe was successfully Deleted"})
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 module.exports = router;

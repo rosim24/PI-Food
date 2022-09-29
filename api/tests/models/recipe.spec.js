@@ -14,8 +14,20 @@ describe('Recipe model', () => {
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
-        Recipe.create({ name: 'Milanesa a la napolitana' });
+      it('should throw an error if summary is null', (done) => {
+        Recipe.create({name: 'Chicken fingers'})
+          .then(() => done(new Error('It requires a valid summary')))
+          .catch(() => done());
+      })
+      it('should throw an error if the Health Score is greater than 100', (done) => {
+        Recipe.create({name:'Chicken Finger', summary: 'The best chicken fingers ever', healthScore: "120"})
+          .then(() => done(new Error('The Health Score should not be greater than 100')))
+          .catch(() => done());
+      })
+      it('should work when its a valid name and summary', () => {
+        Recipe.create({ name: 'Milanesa a la napolitana' })
+          .then((recipe)=>{expect(recipe.name).to.equal('Milanesa a la napolitana')})
+          .catch((error)=>{expect(error.message).toBeDefined()})
       });
     });
   });
