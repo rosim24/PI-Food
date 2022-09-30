@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import { createRecipe } from '../redux/actions';
+import { createRecipe, editRecipe } from '../redux/actions';
 import s from './styles/Create.module.css'
 
-//if (!/^(http[s]?)/.test(value))
 export function validate(inputState) {
     let errors = {};
     if (!inputState.title) {
@@ -27,10 +26,11 @@ export function validate(inputState) {
     return errors;
   };
 
-export default function CreateRecipe () {
+export default function CreateRecipe (props) {
     const diets = useSelector(state => state.diets);
     const dispatch = useDispatch();
     const history = useHistory();
+    const [edit, setEdit] = useState(false);
     const [inputState, setinputState]= useState({
         title: "",
         summary: "",
@@ -42,12 +42,25 @@ export default function CreateRecipe () {
     });
     const[errors, setErrors] = useState({});
 
+    if(props.location.state && inputState.title === ""){
+        setEdit(true);
+        console.log(edit)
+        setinputState({ ...inputState,
+            title: props.location.state.title,
+            summary: props.location.state.summary,
+            healthScore:props.location.state.healthScore,
+            image: props.location.state.image,
+            steps: props.location.state.steps,
+        });
+    }
+
     function handleChange(e){
         setinputState({...inputState, [e.target.name]: e.target.value});
         setErrors(validate({...inputState,[e.target.name]: e.target.value}));
     }
     
     function handleCheckbox (e){
+        console.log(edit)
         if(e.target.checked){
             setinputState({...inputState, diets: [...inputState.diets, e.target.name]})
         }else if(!e.target.checked){
@@ -86,8 +99,15 @@ export default function CreateRecipe () {
             image: inputState.image,
             diets: inputState.diets
         }
-        dispatch(createRecipe(recipe));
-        history.push('/home')
+        if(edit) {
+            console.log("Editar", props.location.state.id)
+            dispatch(editRecipe({...recipe, id: props.location.state.id}));
+            history.push('/home')
+        } else {
+            console.log("Crear")
+            dispatch(createRecipe(recipe));
+            history.push('/home')
+        }
     }
 
     return(
@@ -143,10 +163,10 @@ export default function CreateRecipe () {
                     <p className={s.combotitle}>Describe one by one the steps: </p>
                     <div className={s.combostep}>
                         <textarea className={s.areastep} name="step" value={inputState.step} onChange={(e) => handleChange(e)}/>
-                        <input className={s.stepsub} name="steps" type={"submit"} value={`Save Step #${inputState.steps.length+1}`}/>
+                        <input className={s.stepsub} name="steps" type={"submit"} value={`Save Step #${inputState.steps && inputState.steps.length+1}`}/>
                     </div>
                     <ol>
-                    {inputState.steps.map((step, index)=>{
+                    {inputState.steps && inputState.steps.map((step, index)=>{
                         return (
                             <li className={s.combolable} key={index}>
                                 <label className={s.combolable}>{step}</label>

@@ -41,15 +41,12 @@ const getNeeded = async function(name) {
 
 const cleanSummary = function(summary){
     summary = summary+".";
-    console.log("entra", summary)
     const first = summary.indexOf("score");
     const second = summary.indexOf(".",first);
     const finaltext = summary.slice(0,second);
     const woutobold = finaltext.split("<b>").join("");
     const woutcbold = woutobold.split("</b>").join("");
-    console.log(woutcbold)
     const ref = woutcbold.indexOf("<")
-    console.log(ref)
     let response
     if(ref === -1 ) return woutcbold;
     else {
@@ -146,7 +143,6 @@ const searchById = async function(id){
         })}
         let tdiets = resumeDiets(idSearch.data);
         let cleansummary = cleanSummary(summary)
-        console.log(cleansummary)
         const response = {id, title, healthScore, image, summary: cleansummary, diets: tdiets, steps};
         return response;
     }
@@ -161,9 +157,30 @@ const createRecipe = async function(title, healthScore, summary, steps, image, d
     return {message: "Your Recipe was successfully Created"};
 }
 
+const updateRecipe = async function(id, title, healthScore, summary, steps, image, diets){
+    const cid = id.slice(2);
+    const toUpdate = await Recipe.findByPk(cid,{
+        include:{
+            model: Diet,
+            attributes: ["name"],
+            through:{
+                attributes: [],
+            }
+        }
+    })
+    await toUpdate.update({name: title, healthScore, summary, steps, image})
+    await toUpdate.setDiets([])
+    for(let diet of diets){
+        let dbDiet = await Diet.findOne({where: {name: diet}});
+        await toUpdate.addDiet(dbDiet.id);
+    };
+    return {message: "Your Recipe was successfully Updated"};
+}
+
 module.exports = {
     getNeeded,
     dbRecipes,
     searchById,
-    createRecipe
+    createRecipe,
+    updateRecipe
 }

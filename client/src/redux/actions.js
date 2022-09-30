@@ -8,6 +8,7 @@ export const SEARCH_BY_ID = "SEARCH_BY_ID"
 export const CREATE_RECIPE = "CREATE_RECIPE"
 export const CLEAR_RECIPE = "CLEAR_RECIPE"
 export const DELETE_RECIPE = "DELETE_RECIPE"
+export const EDIT_RECIPE = "EDIT_RECIPE"
 
 export const getRecipes = () => dispatch => {
     return fetch('http://localhost:3001/recipes')
@@ -64,5 +65,12 @@ export const deleteRecipe = (id) => dispatch => {
     return fetch(`http://localhost:3001/recipes/${id}`, {method: "DELETE"})
             .then(r => r.json())
             .then(message => dispatch({type: DELETE_RECIPE, payload: message}))
+            .catch(error => console.log(new Error(error)));
+}
+
+export const editRecipe = (recipe) => dispatch => {
+    return fetch('http://localhost:3001/recipes',{method: "PUT", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(recipe)})
+            .then(r => r.json())
+            .then(message => dispatch({type: EDIT_RECIPE, payload: message}))
             .catch(error => console.log(new Error(error)));
 }

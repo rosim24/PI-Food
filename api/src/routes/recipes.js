@@ -51,4 +51,16 @@ router.delete('/:id', async (req, res) =>{
     }
 })
 
+router.put('/', async (req, res) =>{
+    try {
+        const {id, title, healthScore, summary, steps, image, diets} = req.body;
+        if(id && title && summary){
+            const result = await utils.updateRecipe(id, title, healthScore, summary, steps, image, diets)
+            res.status(201).json(result);
+            } else res.status(400).json({message: "Something went wrong, Please try again"});
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 module.exports = router;
