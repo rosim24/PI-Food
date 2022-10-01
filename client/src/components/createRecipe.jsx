@@ -44,7 +44,6 @@ export default function CreateRecipe (props) {
 
     if(props.location.state && inputState.title === ""){
         setEdit(true);
-        console.log(edit)
         setinputState({ ...inputState,
             title: props.location.state.title,
             summary: props.location.state.summary,
@@ -60,7 +59,6 @@ export default function CreateRecipe (props) {
     }
     
     function handleCheckbox (e){
-        console.log(edit)
         if(e.target.checked){
             setinputState({...inputState, diets: [...inputState.diets, e.target.name]})
         }else if(!e.target.checked){
@@ -116,7 +114,7 @@ export default function CreateRecipe (props) {
             <div className={s.container}>
                 <h3 className={s.title}>Share with us your favorite Recipe!</h3>
                 <form className={s.topform} onSubmit={(e) => handleCreate(e)}>
-                    <input className={s.onsubmit} type={"submit"} value={"Submit here when done"} disabled={ensabledSubmit()}/>
+                    <input className={s.onsubmit} type={"submit"} value={"Submit HERE when done"} disabled={ensabledSubmit()}/>
                     <div className={s.combodiv}>
                         <label className={s.combolable}>Title: </label>
                         <input className={s.comboinput} name="title" value={inputState.title} onChange={(e) => handleChange(e)}/>
@@ -168,8 +166,8 @@ export default function CreateRecipe (props) {
                     <ol>
                     {inputState.steps && inputState.steps.map((step, index)=>{
                         return (
-                            <li className={s.combolable} key={index}>
-                                <label className={s.combolable}>{step}</label>
+                            <li className={s.combolabs} key={index}>
+                                <label className={s.combolabs}>{step}</label>
                                 <button
                                     className={s.stepsub} 
                                     value={step}

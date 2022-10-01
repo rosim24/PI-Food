@@ -6,7 +6,7 @@ import s from './styles/SearchBar.module.css'
 
 import { getRecipes, filterByDiet, filterBySource, searchByName } from "../redux/actions";
 
-export default function SearchBar ({handleOrder}) {
+export default function SearchBar ({handleOrder, setCurrentPage}) {
     const dispatch = useDispatch();
     const diets = useSelector((state) => state.diets);
     const [name, setName] = useState("");
@@ -20,6 +20,7 @@ export default function SearchBar ({handleOrder}) {
         e.preventDefault();
         dispatch(searchByName(name))
         setName("")
+        setCurrentPage(1)
     }
 
     function handleDietSelect(e){
@@ -35,17 +36,17 @@ export default function SearchBar ({handleOrder}) {
     return(
         <div className={s.bar}>
             <div className={s.titlecontainer}>
-                <h1 className={s.title}>FOOD-ish</h1>
-
-                <div className={s.searchcontainer}>
+                <Link to='/' ><h1 className={s.title}>FOOD-ish</h1></Link>
+                <div className={s.head}>
                     <div className={s.div}>
                         <input className={s.input} type="text" placeholder="Find by name" value={name} onChange={e => setName(e.target.value)}/>
                         <button className={s.searchbutton} onClick={e => runSearchByName(e)}> &#8227;</button>
                     </div>
-                    <button className={s.reload} onClick={e =>handleResetClick(e)}>Show All</button>                
+                    <div className={s.searchcontainer}>
+                        <button className={s.reload} onClick={e =>handleResetClick(e)}>Show All</button>                
+                        <Link to= '/create' className={s.link}>Create your own Recipe</Link>
+                    </div>
                 </div>
-
-                <Link to= '/create' className={s.link}>Create your own Recipe</Link>
             </div>
             <div className={s.bottombar}>
                 <div className={s.combo}>

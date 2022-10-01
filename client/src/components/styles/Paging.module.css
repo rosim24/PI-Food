@@ -23,3 +23,13 @@
     border-color: whitesmoke;
     cursor: pointer;
 }
+
+@media (max-width:530px){
+    .element{
+        margin-inline: 3px;
+    }
+    .btn{
+        font-size: 10px;
+        padding-inline: 3px;
+    }
+}

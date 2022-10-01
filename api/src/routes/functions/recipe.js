@@ -149,7 +149,9 @@ const searchById = async function(id){
 };
 
 const createRecipe = async function(title, healthScore, summary, steps, image, diets){
-    const nwrecipe = await Recipe.create({name: title, healthScore, summary, steps, image})
+    let nwrecipe={};
+    if(image === "") nwrecipe = await Recipe.create({name: title, healthScore, summary, steps})
+    else nwrecipe = await Recipe.create({name: title, healthScore, summary, steps, image})
         for(let diet of diets){
             let dbDiet = await Diet.findOne({where: {name: diet}});
             await nwrecipe.addDiet(dbDiet.id);

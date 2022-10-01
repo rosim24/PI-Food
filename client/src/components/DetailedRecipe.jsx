@@ -36,8 +36,8 @@ export class DetailedRecipe extends React.Component{
                     {title ? (<h2 className={s.title}>{title}</h2>): (<h2 className={s.title}>"...Loading..."</h2>)}
                     <p className={s.combotitle}>Summary:</p>
                     <div className={s.fix}>
-                    <p className={s.combocont}>{summary}</p>
-                    {imange ? (<img className={s.img} alt={title} src={image} width="356px" height="237px"/>) : (<img className={s.img} alt={title} src='https://apuntococina.com/wp-content/uploads/2017/07/mise-en-place.jpg' width="356px" height="237px"/>)}
+                        <p className={s.combocont}>{summary}</p>
+                        {image ? (<img className={s.img} alt={title} src={image}/>) : (<img className={s.img} alt={title} src='https://apuntococina.com/wp-content/uploads/2017/07/mise-en-place.jpg' width="356px" height="237px"/>)}
                     </div>
                     <p className={s.healthScore}>The Health Score of this Recipe is: {healthScore ? healthScore : "Not set"}</p>
                     <p className={s.combotitle}>This Recipe works for:</p>

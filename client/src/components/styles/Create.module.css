@@ -23,7 +23,7 @@
 .container{
     background-color: ghostwhite;
     justify-content: center;
-    width: 700px;
+    width: 70%;
     align-self: center;
 }
 .title{
@@ -35,7 +35,7 @@
 .onsubmit{
     background-color: rgb(74, 35, 90);
     color: whitesmoke;
-    font-family: 'Amira';
+    font-family: candara;
     font-size: 20px;
     font-weight: 600;
 }
@@ -61,6 +61,12 @@
     font-family: 'Arima';
     font-weight: 600;
     margin-left: 20px;
+    width: 98px;
+}
+.combolabs{
+    font-family: 'Arima';
+    font-weight: 600;
+    margin-left: 20px;
 }
 .combotitle{
     padding-left: 15px;
@@ -75,8 +81,9 @@
     font-family: 'Arima';
     border-radius: 10px;
     margin-left: 10px;
-    width: 60%;
+    width: 75%;
     padding-left: 10px;
+    margin-right: 10px;
 }
 .diets{
     list-style: none;
@@ -94,10 +101,12 @@
     color: rgb(74, 35, 90);
     background: grey;
     accent-color: currentcolor;
+    margin-left: 15px;
 }
 .combostep{
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 .areas{
     display: block;
@@ -110,6 +119,7 @@
     border-radius: 10px;
     font-family: 'Amira';
     font-size: 16px;
+    margin-right: 10px;
 }
 .areastep{
     display:inline-block;
@@ -131,6 +141,7 @@
     font-family: candara;
     font-weight: bolder;
     border-radius: 10px;
+    margin-right: 10px;
 }
 .stepsub:hover{
     color: rgb(74, 35, 90);
@@ -140,4 +151,35 @@
     margin-left: 5px;
     font-family: 'Amira';
     color: rgb(74, 35, 90);
+}
+@media (max-width:910px){
+    .supercontainer{
+        height: 100%;
+    }
+}
+@media (max-width:850px){
+    .supercontainer{
+        height: 100vmax;
+    }
+    .title{
+        font-size: 20px;
+    }
+    .combotitle{
+        font-size: 15px;
+    }
+    .combolable{
+        font-size: small;
+    }
+    .combolabs{
+        font-size: small;
+    }
+    .stepsub{
+        font-size: small;
+    }
+    .back{
+        font-size: small;
+    }
+    .diets{
+        font-size: small;
+    }
 }

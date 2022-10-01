@@ -36,6 +36,7 @@ module.exports = (sequelize) => {
     },
     image:{
       type: DataTypes.STRING,
+      defaultValue: "https://img.freepik.com/psd-gratis/vista-superior-libro-recetas-ingredientes_23-2148561473.jpg?w=2000",
     }
   },{
     timestamps: false,

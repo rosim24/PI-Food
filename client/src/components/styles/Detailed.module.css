@@ -50,7 +50,7 @@
 }
 .title{
     padding-top: 10px;
-    padding-left: 15px;
+    padding-inline: 15px;
     font-family: 'Titan One';
     font-size: 30px;
 }
@@ -109,4 +109,33 @@
     border-radius: 10px;
     border-style: groove;
     margin-right: 20px;
+    max-width: 50%;
+}
+@media (max-width:910px){
+    .supercontainer{
+        height: 100%;
+    }
+}
+@media (max-width:850px){
+    .title{
+        font-size: 20px;
+    }
+    .combotitle{
+        font-size: 15px;
+    }
+    .combocont{
+        font-size: small;
+    }
+    .back{
+        font-size: small;
+    }
+    .healthScore{
+        font-size: small;
+    }
+    .steps{
+        font-size: small;
+    }
+    .diets{
+        font-size: small;
+    }
 }

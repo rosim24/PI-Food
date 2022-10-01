@@ -1,10 +1,20 @@
 .container{
     background-image: url('https://wallpaperaccess.com/full/1151945.jpg');
     display: grid;
-    grid-template-columns: 350px 350px 350px;
+    grid-template-columns: 26% 26% 26%;
     justify-content: center;
 }
 .supercontainer{
     background-image: url('https://wallpaperaccess.com/full/1151945.jpg');
     height:100vh;
+}
+@media (max-width:850px){
+    .container{
+        grid-template-columns: 40% 40%;
+    }
+}
+@media (max-width:530px){
+    .container{
+        grid-template-columns: 70%;
+    }
 }

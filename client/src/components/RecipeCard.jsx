@@ -15,7 +15,7 @@ export default class RecipeCard extends React.Component{
                     <label className={s.score}> {healthScore} </label>
                 </label>
             </div>
-            <div className={s.imgcontainer}><img className={s.rcpimg} alt={title} src={image} width="312" height="231"/></div>
+            <div className={s.imgcontainer}><img className={s.rcpimg} alt={title} src={image} /></div>
             <div className={s.dietcontainer}>
             {
             diets && diets.map((d, idx) =>(
