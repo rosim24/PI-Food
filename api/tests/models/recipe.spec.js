@@ -24,10 +24,9 @@ describe('Recipe model', () => {
           .then(() => done(new Error('The Health Score should not be greater than 100')))
           .catch(() => done());
       })
-      it('should work when its a valid name and summary', () => {
-        Recipe.create({ name: 'Milanesa a la napolitana' })
-          .then((recipe)=>{expect(recipe.name).to.equal('Milanesa a la napolitana')})
-          .catch((error)=>{expect(error.message).toBeDefined()})
+      it('should work when its a valid name and summary', (done) => {
+        Recipe.create({ name: 'Milanesa a la napolitana', summary: 'The best chicken fingers ever' })
+          .then(()=>done());
       });
     });
   });

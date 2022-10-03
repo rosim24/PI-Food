@@ -25,7 +25,7 @@ const resumeDiets = (obj)=>{
 };
 
 const getNeeded = async function(name) {
-    const apiSearch = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=25`);
+    const apiSearch = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
     let array=[];
     if(name){
         array = apiSearch.data.results.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
