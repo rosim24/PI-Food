@@ -12,6 +12,18 @@
     margin-bottom: 0px;
     margin-inline: 8px;
 }
+.current{
+    background-color: rgb(81, 46, 95);
+    color: whitesmoke;
+    border-color: whitesmoke;
+    font-family: fantasy;
+    border-radius: 5px;
+}
+.current:hover{
+    background-color: rgb(242, 244, 244);
+    cursor: pointer;
+    color: black;
+}
 .btn{
     font-family: fantasy;
     border-radius: 5px;

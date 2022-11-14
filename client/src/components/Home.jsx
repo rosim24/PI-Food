@@ -27,6 +27,14 @@ export default function Home () {
         setCurrentPage(number);
     }
 
+    function handlePrev(){
+        setCurrentPage((prev)=>(prev-1))
+    }
+
+    function handleNext(){
+        setCurrentPage((prev)=>(prev+1))
+    }
+
     function handleOrder(e){
         e.preventDefault();
         dispatch(orderRecipes(e.target.value))
@@ -38,8 +46,11 @@ export default function Home () {
         <div className={s.supercontainer}>
             <SearchBar handleOrder = {handleOrder} setCurrentPage={setCurrentPage}/>
             <PagingBar  totalRecipes={allRecipes.length} 
-                        recipesPerPage={qttyPerPage} 
-                        handlePage={handlePage}/>
+                        recipesPerPage={qttyPerPage}
+                        currentPage = {currentPage} 
+                        handlePage={handlePage}
+                        handleNext={handleNext}
+                        handlePrev={handlePrev}/>
             <div className={s.container}>
                 {
                 currentRecipes && currentRecipes.map(r =>(
