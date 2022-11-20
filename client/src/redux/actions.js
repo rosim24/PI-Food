@@ -10,29 +10,33 @@ export const CLEAR_RECIPE = "CLEAR_RECIPE"
 export const DELETE_RECIPE = "DELETE_RECIPE"
 export const EDIT_RECIPE = "EDIT_RECIPE"
 
+//const baseURL = 'http://localhost:3001/'
+const baseURL = 'https://pi-back-production.up.railway.app/'
+
+
 export const getRecipes = () => dispatch => {
-    return fetch('http://localhost:3001/recipes')
+    return fetch(`${baseURL}recipes`)
         .then(r => r.json())
         .then(recipes => dispatch({type: GET_RECIPES, payload: recipes}))
         .catch(error => console.log(new Error(error)));
 }
 
 export const getDiets = () => dispatch => {
-    return fetch('http://localhost:3001/diets')
+    return fetch(`${baseURL}diets`)
         .then(r => r.json())
         .then(diets => dispatch({type: GET_DIETS, payload: diets}))
         .catch(error => console.log(new Error(error)));
 }
 
 export const searchByName = (name) => dispatch => {
-    return fetch(`http://localhost:3001/recipes?name=${name}`)
+    return fetch(`${baseURL}recipes?name=${name}`)
         .then(r => r.json())
         .then(recipes => dispatch({type: SEARCH_BY_NAME, payload: recipes}))
         .catch(error => console.log(new Error(error)));
 }
 
 export const searchById = (id) => dispatch => {
-    return fetch(`http://localhost:3001/recipes/${id}`)
+    return fetch(`${baseURL}recipes/${id}`)
         .then(r => r.json())
         .then(recipe => dispatch({type: SEARCH_BY_ID, payload: recipe}))
         .catch(error => console.log(new Error(error)));
@@ -55,21 +59,21 @@ export const orderRecipes = (order) => {
 }
 
 export const createRecipe = (recipe) => dispatch => {
-    return fetch('http://localhost:3001/recipes',{method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(recipe)})
+    return fetch(`${baseURL}recipes`,{method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(recipe)})
             .then(r => r.json())
             .then(message => dispatch({type: CREATE_RECIPE, payload: message}))
             .catch(error => console.log(new Error(error)));
 }
 
 export const deleteRecipe = (id) => dispatch => {
-    return fetch(`http://localhost:3001/recipes/${id}`, {method: "DELETE"})
+    return fetch(`${baseURL}recipes/${id}`, {method: "DELETE"})
             .then(r => r.json())
             .then(message => dispatch({type: DELETE_RECIPE, payload: message}))
             .catch(error => console.log(new Error(error)));
 }
 
 export const editRecipe = (recipe) => dispatch => {
-    return fetch('http://localhost:3001/recipes',{method: "PUT", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(recipe)})
+    return fetch(`${baseURL}recipes`,{method: "PUT", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(recipe)})
             .then(r => r.json())
             .then(message => dispatch({type: EDIT_RECIPE, payload: message}))
             .catch(error => console.log(new Error(error)));
