@@ -1,4 +1,4 @@
-![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
+![PI-Food](Food-ish.png)
 
 # Individual Project - Henry Food
 
